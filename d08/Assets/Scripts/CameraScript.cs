@@ -14,6 +14,6 @@ public class CameraScript : MonoBehaviour {
 
 	private void FixedUpdate()
 	{
-        transform.position = new Vector3(player.transform.position.x, height, player.transform.position.z - decal);
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y + height, player.transform.position.z - decal);
 	}
 }
