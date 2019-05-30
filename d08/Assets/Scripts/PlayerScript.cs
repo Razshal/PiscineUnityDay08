@@ -3,63 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerScript : MonoBehaviour {
-    new private Camera camera;
-    private NavMeshAgent navMeshAgent;
+public class PlayerScript : CharacterScript
+{
     private RaycastHit clickHit;
-    private Animator animator;
+    new private Camera camera;
 
-    public enum State
+    new void Start()
     {
-        RUN,
-        ATTACKING,
-        IDLE,
-        DEAD
+        base.Start();
+        camera = Camera.main;
     }
 
-    public State state;
-
-
-	// Use this for initialization
-	void Start () {
-        camera = Camera.main;
-        navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
-        animator = gameObject.GetComponent<Animator>();
-	}
-
-	private void FixedUpdate()
-	{
-		
-	}
-
-    private void UpdateAnimation()
+    new void Update()
     {
-        switch (state)
+        base.Update();
+        if (Input.GetMouseButtonDown(0)
+            && Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out clickHit))
         {
-            case State.RUN:
-                animator.SetBool("Run", true);
-                break;
-            case State.ATTACKING:
-                animator.SetBool("Attack", true);
-                break;
-            default:
-                animator.SetBool("Run", false);
-                animator.SetBool("Attack", false);
-                break;
+			navMeshAgent.SetDestination(clickHit.point);         
         }
     }
-
-	// Update is called once per frame
-	void Update () {
-
-        UpdateAnimation();
-        if (Input.GetMouseButtonDown(0) 
-            && Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out clickHit))
-            navMeshAgent.SetDestination(clickHit.point);
-        if (navMeshAgent.hasPath && navMeshAgent.remainingDistance > 0.1f)
-            state = State.RUN;
-        else
-            state = State.IDLE;
-            
-	}
 }
