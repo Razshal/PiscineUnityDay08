@@ -19,6 +19,5 @@ public class EnemyScript : CharacterScript
     new void Update()
     {
         base.Update();
-
     }
 }
