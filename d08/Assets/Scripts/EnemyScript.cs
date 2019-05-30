@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyScript : CharacterScript
 {
-    private GameObject player;
 
     new void Start()
     {
@@ -14,15 +13,15 @@ public class EnemyScript : CharacterScript
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-            player = other.gameObject;
+            enemyTarget = other.gameObject;
     }
 
     new void Update()
     {
         base.Update();
-        if (player)
-            navMeshAgent.SetDestination(player.transform.position);
-        if (isInContact && player)
+        if (enemyTarget)
+            navMeshAgent.SetDestination(enemyTarget.transform.position);
+        if (isInContact && enemyTarget)
         {
             state = State.ATTACKING;
         }

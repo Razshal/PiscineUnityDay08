@@ -20,7 +20,12 @@ public class PlayerScript : CharacterScript
         if (Input.GetMouseButtonDown(0)
             && Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out clickHit))
         {
-            navMeshAgent.SetDestination(clickHit.point);
+            // Sets enemy target for mother script
+            if (clickHit.collider && clickHit.collider.gameObject.CompareTag("Enemy"))
+                enemyTarget = clickHit.collider.gameObject;
+            // Or set player click movement
+            else
+                navMeshAgent.SetDestination(clickHit.point);
         }
     }
 }

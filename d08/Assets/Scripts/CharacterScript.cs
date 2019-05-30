@@ -9,7 +9,8 @@ public class CharacterScript : MonoBehaviour {
     public int maxLife;
     public int life;
     private bool isPlayer;
-    protected bool isInContact;
+    public bool isInContact;
+    public GameObject enemyTarget;
 
     public enum State
     {
@@ -29,27 +30,39 @@ public class CharacterScript : MonoBehaviour {
 
     protected void UpdateAnimation()
     {
+        string attackVar = isPlayer ? "Attack" : "ZombieAttack";
+
+        Debug.Log(gameObject.name + " State =" + state);
         switch (state)
         {
             case State.RUN:
+                animator.SetBool(attackVar, false);
                 animator.SetBool("Run", true);
                 break;
             case State.ATTACKING:
-                animator.SetBool(isPlayer ? "Attack" : "ZombieAtack", true);
+                animator.SetBool("Run", false);
+                animator.SetBool(attackVar, true);
                 break;
             default:
                 animator.SetBool("Run", false);
-                animator.SetBool("Attack", false);
+                animator.SetBool(attackVar, false);
                 break;
         }
     }
 
     protected void Update()
     {
-        isInContact = navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance;
+        if (enemyTarget)
+            navMeshAgent.SetDestination(enemyTarget.transform.position);
 
+        // Defines if target is reached
+        isInContact = navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance;
+
+        // Sets states for animations and attack
         if (navMeshAgent.hasPath && !isInContact)
             state = State.RUN;
+        else if (enemyTarget && isInContact)
+            state = State.ATTACKING;
         else
             state = State.IDLE;
         UpdateAnimation();
