@@ -19,11 +19,6 @@ public class EnemyScript : CharacterScript
     new void Update()
     {
         base.Update();
-        if (enemyTarget)
-            navMeshAgent.SetDestination(enemyTarget.transform.position);
-        if (isInContact && enemyTarget)
-        {
-            state = State.ATTACKING;
-        }
+
     }
 }
