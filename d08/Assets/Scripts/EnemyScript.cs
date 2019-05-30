@@ -11,23 +11,20 @@ public class EnemyScript : CharacterScript
         base.Start();
     }
 
-	private void OnTriggerEnter(Collider other)
-	{
+    private void OnTriggerEnter(Collider other)
+    {
         if (other.gameObject.CompareTag("Player"))
-        {
             player = other.gameObject;
-        }
-	}
+    }
 
-	private void FixedUpdate()
-	{
-
-	}
-
-	new void Update()
+    new void Update()
     {
         base.Update();
         if (player)
             navMeshAgent.SetDestination(player.transform.position);
+        if (isInContact && player)
+        {
+            state = State.ATTACKING;
+        }
     }
 }

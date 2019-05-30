@@ -20,7 +20,7 @@ public class PlayerScript : CharacterScript
         if (Input.GetMouseButtonDown(0)
             && Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out clickHit))
         {
-			navMeshAgent.SetDestination(clickHit.point);         
+            navMeshAgent.SetDestination(clickHit.point);
         }
     }
 }

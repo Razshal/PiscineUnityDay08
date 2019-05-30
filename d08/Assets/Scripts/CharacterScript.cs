@@ -6,7 +6,10 @@ using UnityEngine.AI;
 public class CharacterScript : MonoBehaviour {
     protected Animator animator;
     protected NavMeshAgent navMeshAgent;
-
+    public int maxLife;
+    public int life;
+    private bool isPlayer;
+    protected bool isInContact;
 
     public enum State
     {
@@ -21,6 +24,7 @@ public class CharacterScript : MonoBehaviour {
     {
         navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
         animator = gameObject.GetComponent<Animator>();
+        isPlayer = gameObject.CompareTag("Player");
     }
 
     protected void UpdateAnimation()
@@ -31,7 +35,7 @@ public class CharacterScript : MonoBehaviour {
                 animator.SetBool("Run", true);
                 break;
             case State.ATTACKING:
-                animator.SetBool("Attack", true);
+                animator.SetBool(isPlayer ? "Attack" : "ZombieAtack", true);
                 break;
             default:
                 animator.SetBool("Run", false);
@@ -42,7 +46,9 @@ public class CharacterScript : MonoBehaviour {
 
     protected void Update()
     {
-        if (navMeshAgent.hasPath && navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
+        isInContact = navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance;
+
+        if (navMeshAgent.hasPath && !isInContact)
             state = State.RUN;
         else
             state = State.IDLE;
