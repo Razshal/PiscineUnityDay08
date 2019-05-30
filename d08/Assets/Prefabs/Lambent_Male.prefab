@@ -2481,6 +2481,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7441e0dbbdf45feab2267681925bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxLife: 3
+  life: 0
+  isInContact: 0
+  enemyTarget: {fileID: 0}
   state: 0
 --- !u!135 &135404427956844362
 SphereCollider:

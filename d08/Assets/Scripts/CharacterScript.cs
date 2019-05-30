@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class CharacterScript : MonoBehaviour {
     protected Animator animator;
     protected NavMeshAgent navMeshAgent;
-    public int maxLife;
+    public int maxLife = 3;
     public int life;
     private bool isPlayer;
     public bool isInContact;
@@ -26,6 +26,7 @@ public class CharacterScript : MonoBehaviour {
         navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
         animator = gameObject.GetComponent<Animator>();
         isPlayer = gameObject.CompareTag("Player");
+        life = maxLife;
     }
 
     protected void UpdateAnimation()
@@ -48,6 +49,13 @@ public class CharacterScript : MonoBehaviour {
                 animator.SetBool(attackVar, false);
                 break;
         }
+    }
+
+    protected void ReceiveDamages()
+    {
+        life -= 1;
+        if (life <= 0)
+            animator.SetTrigger("Dead");
     }
 
     protected void Update()
