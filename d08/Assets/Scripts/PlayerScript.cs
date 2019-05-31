@@ -13,7 +13,7 @@
         if (enemyTarget)            enemyToDisplay = enemyTarget.GetComponent<CharacterScript>();        else if (enemyHover)            enemyToDisplay = enemyHover.GetComponent<CharacterScript>();                // Then if enemy, display his infos        if (enemyToDisplay)        {
             enemyInfosPanel.SetActive(true);
             enemyLifeSlider.maxValue = enemyToDisplay.maxLife;            enemyLifeSlider.value = enemyToDisplay.life;            enemyName.text = enemyToDisplay.displayName;            enemyLevel.text = "LVL " + enemyToDisplay.level;
-        }        else            enemyInfosPanel.SetActive(false);        // Update the player ones        XpSlider.value = experience;		XpSlider.maxValue = requieredXp;        xpText.text = experience + "/" + requieredXp;        lvlText.text = "LVL " + level;        lifeSlider.value = life;        lifeText.text = life + "/" + lifeSlider.maxValue;        lifeSlider.maxValue = maxLife;    }    new void Update()    {        base.Update();
+        }        else            enemyInfosPanel.SetActive(false);        // Update the player ones        XpSlider.value = experience;		XpSlider.maxValue = requieredXp;        xpText.text = experience + "/" + requieredXp;        lvlText.text = "LVL " + level;        lifeSlider.value = life;        lifeText.text = life + "/" + lifeSlider.maxValue;        lifeSlider.maxValue = maxLife;    }    public void OpenStats()    {        statsUI.SetActive(!statsUI.activeSelf);    }    public void AddAgility()    {        agility++;    }    public void AddStrength()    {        strength++;        minDamage = strength / 2;        maxDamage = minDamage + 4;    }    public void AddConst()    {        strength++;        maxLife = constitution * 5;    }    new void Update()    {        base.Update();
 
         // Updating UI
         UpdateUi();
@@ -26,4 +26,4 @@
             navMeshAgent.SetDestination(clickHit.point);
             prioritaryWaypoint = true;
             enemyTarget = null;
-        }        if (Input.GetKeyDown(KeyCode.C))            statsUI.SetActive(!statsUI.activeSelf);    }}
+        }        if (Input.GetKeyDown(KeyCode.C))            OpenStats();    }}
