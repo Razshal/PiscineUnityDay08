@@ -882,7 +882,7 @@ GameObject:
   - component: {fileID: 114485144052117746}
   m_Layer: 0
   m_Name: Lambent_Male
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1502,8 +1502,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1926436726080878}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4994614492764542}
@@ -1650,8 +1650,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1484503759379652}
-  m_LocalRotation: {x: 0, y: -0.68310946, z: -0, w: 0.7303161}
-  m_LocalPosition: {x: -0.130589, y: 0, z: -0.0042715}
+  m_LocalRotation: {x: -9.313224e-10, y: -0.68310946, z: 0.00000005494802, w: 0.7303161}
+  m_LocalPosition: {x: -0.13058901, y: 0, z: -0.0042715026}
   m_LocalScale: {x: 0.99999845, y: 1, z: 0.99999845}
   m_Children:
   - {fileID: 4443417712337606}
@@ -1943,7 +1943,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1746475319031524}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 117.28878, y: 0, z: 122.69097}
+  m_LocalPosition: {x: 114.94, y: 0, z: 120.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4253174455707994}
@@ -2427,8 +2427,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1176372172965538}
-  m_LocalRotation: {x: -0.00007067519, y: 0.7961315, z: 0.000054974877, w: 0.6051237}
-  m_LocalPosition: {x: -0.015627, y: 0, z: -0.00571}
+  m_LocalRotation: {x: -0.00007071344, y: 0.7961315, z: 0.000054940563, w: 0.6051237}
+  m_LocalPosition: {x: -0.015626958, y: 0, z: -0.0057099885}
   m_LocalScale: {x: 0.99999374, y: 1, z: 0.99999374}
   m_Children:
   - {fileID: 4699787872000980}
@@ -2442,7 +2442,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1209711233204996}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4772193978465052}
@@ -2452,7 +2452,7 @@ Transform:
   - {fileID: 4127811615877274}
   m_Father: {fileID: 4253174455707994}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.00001}
 --- !u!95 &95852006618324180
 Animator:
   serializedVersion: 3
@@ -2652,11 +2652,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 1000
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
