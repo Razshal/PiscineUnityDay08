@@ -15,7 +15,16 @@ public class EnemyScript : CharacterScript
 	private void OnMouseDown()
 	{
         player.GetComponent<PlayerScript>().enemyTarget = gameObject;
-        Debug.Log("OnMouseDown");
+	}
+
+	private void OnMouseOver()
+	{
+        player.GetComponent<PlayerScript>().enemyHover = gameObject;
+	}
+
+	private void OnMouseExit()
+	{
+        player.GetComponent<PlayerScript>().enemyHover = null;
 	}
 
 	private void OnTriggerEnter(Collider other)

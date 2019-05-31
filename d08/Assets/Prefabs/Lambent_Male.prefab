@@ -2481,11 +2481,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7441e0dbbdf45feab2267681925bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 3
-  life: 0
-  isInContact: 0
   enemyTarget: {fileID: 0}
-  isAlive: 0
+  displayName: Male Zombie
+  life: 0
+  maxLife: 0
+  strength: 10
+  agility: 10
+  constitution: 10
+  armor: 10
+  minDamage: 0
+  maxDamage: 0
+  level: 1
+  requieredXp: 100
+  experience: 20
+  money: 0
+  isInContact: 0
   state: 0
 --- !u!135 &135404427956844362
 SphereCollider:

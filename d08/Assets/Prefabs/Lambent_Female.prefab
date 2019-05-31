@@ -1427,7 +1427,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1619243067009414}
-  m_LocalRotation: {x: -0.00000072838435, y: -0.6801655, z: 0.16693522, w: 0.71379805}
+  m_LocalRotation: {x: -0.00000072838424, y: -0.68016547, z: 0.1669352, w: 0.713798}
   m_LocalPosition: {x: 0.013591, y: -0.03034, z: -0.1548845}
   m_LocalScale: {x: 0.99999154, y: 0.9999992, z: 0.9999923}
   m_Children:
@@ -2480,11 +2480,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7441e0dbbdf45feab2267681925bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 3
-  life: 0
-  isInContact: 0
   enemyTarget: {fileID: 0}
-  isAlive: 0
+  displayName: Female Zombie
+  life: 0
+  maxLife: 0
+  strength: 10
+  agility: 10
+  constitution: 10
+  armor: 10
+  minDamage: 0
+  maxDamage: 0
+  level: 1
+  requieredXp: 100
+  experience: 20
+  money: 0
+  isInContact: 0
   state: 0
 --- !u!135 &135209863696761226
 SphereCollider:
