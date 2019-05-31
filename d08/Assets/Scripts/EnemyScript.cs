@@ -8,12 +8,8 @@ public class EnemyScript : CharacterScript
 
     new void Start()
     {
+		base.Start();
         player = GameObject.FindWithTag("Player");
-        agility = agility * (int)(level * 0.15f);
-        strength = strength * (int)(level * 0.15f);
-        constitution += constitution * (int)(level * 0.15f);
-        base.Start();
-
     }
 
 	private void OnMouseDown()

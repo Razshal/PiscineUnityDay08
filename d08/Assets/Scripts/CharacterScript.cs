@@ -19,13 +19,11 @@
     private bool isPlayer;
     private bool deadTrigger = false;
     private bool deathCoroutine = false;
-    // Allows the animation to communicate his attack frame
-    public int attackFrame = 0;
 
     // Allows the player to get out of fight
     protected bool prioritaryWaypoint = false;
     public enum State    {        RUN,        ATTACKING,        IDLE,        DEAD    }    public State state;    protected void Start()    {        navMeshAgent = gameObject.GetComponent<NavMeshAgent>();        animator = gameObject.GetComponent<Animator>();        isPlayer = gameObject.CompareTag("Player");        playerScript = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();        life = maxLife = constitution * 5;        minDamage = strength / 2;        maxDamage = minDamage + 4;    }    protected void UpdateAnimation()    {        string attackVar = isPlayer ? "Attack" : "ZombieAttack";        switch (state)        {            case State.DEAD:                animator.SetBool(attackVar, false);                animator.SetBool("Run", false);                if (!deadTrigger)                {
-                    animator.SetTrigger("Dead");                    deadTrigger = true;                }                break;            case State.RUN:                animator.SetBool(attackVar, false);                animator.SetBool("Run", true);                break;            case State.ATTACKING:                animator.SetBool("Run", false);                animator.SetBool(attackVar, true);                break;            default:                animator.SetBool("Run", false);                animator.SetBool(attackVar, false);                break;        }    }    public void AttackEnnemyWithAnimation()    {        if (state == State.ATTACKING && enemyTarget && attackFrame > 0)        {            enemyTarget.GetComponent<CharacterScript>()                       .ReceiveDamages(agility, minDamage, maxDamage);            attackFrame = 0;        }    }    public void ReceiveDamages(int attackerAgility, int attackerMinDamage, int attackerMaxDamage)    {        float random = Random.value;        int hitChance = 75 + attackerAgility - agility;        int baseDamage = random < 0.5 ? attackerMinDamage : attackerMaxDamage;        Debug.Log(name + " receive attack " + (random * 100 <= hitChance ? "success" : "miss") + random + "/" + hitChance);        if (random * 100 <= hitChance)            life -= (baseDamage * (1 - armor / 200));
+                    animator.SetTrigger("Dead");                    deadTrigger = true;                }                break;            case State.RUN:                animator.SetBool(attackVar, false);                animator.SetBool("Run", true);                break;            case State.ATTACKING:                animator.SetBool("Run", false);                animator.SetBool(attackVar, true);                break;            default:                animator.SetBool("Run", false);                animator.SetBool(attackVar, false);                break;        }    }    public void AttackEnnemyWithAnimation()    {        if (state == State.ATTACKING && enemyTarget)        {            enemyTarget.GetComponent<CharacterScript>()                       .ReceiveDamages(agility, minDamage, maxDamage);        }    }    public void ReceiveDamages(int attackerAgility, int attackerMinDamage, int attackerMaxDamage)    {        float random = Random.value;        int hitChance = 75 + attackerAgility - agility;        int baseDamage = random < 0.5 ? attackerMinDamage : attackerMaxDamage;        Debug.Log(name + " receive attack " + (random * 100 <= hitChance ? "success" : "miss") + random + "/" + hitChance);        if (random * 100 <= hitChance)            life -= (baseDamage * (1 - armor / 200));
 
         if (life <= 0)        {
             state = State.DEAD;            if (!isPlayer)            {                playerScript.ReceiveExperience(experience);                playerScript.money += money;            }        }    }    private IEnumerator DeadDisapearing()    {        deathCoroutine = true;        Destroy(gameObject.GetComponent<CharacterController>());        Destroy(gameObject.GetComponent<NavMeshAgent>());        yield return new WaitForSeconds(4);        Destroy(gameObject, 2f);        while (gameObject)        {
@@ -34,9 +32,7 @@
         }    }
 
     private void FixedUpdate()
-    {        if (state != State.DEAD)        {
-            // Will attack if animation communicated the right frame
-            AttackEnnemyWithAnimation();            if (enemyTarget)                navMeshAgent.SetDestination(enemyTarget.transform.position);
+    {        if (state != State.DEAD)        {            if (enemyTarget)                navMeshAgent.SetDestination(enemyTarget.transform.position);
 
             // Defines if target is reached
             isInContact = navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance;        }
